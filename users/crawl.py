@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 def crawl():
-    # crawl_acm()
+    crawl_acm()
     crawl_oi()
 
 
