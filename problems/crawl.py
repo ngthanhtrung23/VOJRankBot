@@ -1,5 +1,6 @@
 import re
 import requests
+import os.path
 from bs4 import BeautifulSoup
 
 def crawl():
@@ -44,7 +45,9 @@ def crawl_category(category):
         page += 1
 
     problems.sort()
-    output_file = open(OUTPUT_FILE, 'w')
+    full_output_path = os.path.join( os.path.dirname(os.path.realpath(__file__)), OUTPUT_FILE)
+    print "Output to " + full_output_path
+    output_file = open(full_output_path, 'w')
     for problem in problems:
         output_file.write(problem + '\n')
 

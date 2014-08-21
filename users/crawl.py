@@ -1,5 +1,6 @@
 import re
 import requests
+import os.path
 from bs4 import BeautifulSoup
 
 
@@ -12,10 +13,11 @@ def crawl():
     crawl_oi()
 
 
-def crawl_acm(last_crawled=None):
+cur_dir = os.path.dirname(os.path.realpath(__file__))
 
-    INPUT_FILE = '../problems/acm.txt'
-    OUTPUT_FILE = 'ranks/acm/'
+def crawl_acm(last_crawled=None):
+    INPUT_FILE = os.path.join(cur_dir, '../problems/acm.txt')
+    OUTPUT_FILE = os.path.join(cur_dir, 'ranks/acm/')
     RANK_URL = 'http://vn.spoj.com/ranks/'
     SUBMISSION_PER_PAGE = 20
 
@@ -82,8 +84,8 @@ def crawl_acm(last_crawled=None):
 
 def crawl_oi(last_crawled=None):
 
-    INPUT_FILE = '../problems/oi.txt'
-    OUTPUT_FILE = 'ranks/oi/'
+    INPUT_FILE = os.path.join(cur_dur, '../problems/oi.txt')
+    OUTPUT_FILE = os.path.join(cur_dir, 'ranks/oi/')
     RANK_URL = 'http://vn.spoj.com/ranks/'
     SUBMISSION_PER_PAGE = 20
 
@@ -169,6 +171,6 @@ def crawl_oi(last_crawled=None):
             output_file.write(user[1] + ' ' + str(user[0]) + '\n')
 
 
-# crawl()
+crawl()
 # for user in user_scores:
 #     print user, user_scores[user], user_problems[user]
