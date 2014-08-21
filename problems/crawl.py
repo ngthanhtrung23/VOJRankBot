@@ -3,31 +3,33 @@ import requests
 import os.path
 from bs4 import BeautifulSoup
 
+
 def crawl():
     crawl_category('acm')
     crawl_category('oi')
 
+
 def crawl_category(category):
+
     OUTPUT_FILE = category +'.txt'
     URL = 'http://vn.spoj.com/problems/' + category
     PROBLEMS_PER_PAGE = 50
 
-    page = 0
-    problems = []
 
-    while True:
-        print 'Crawling page', page
+    def crawl_page(page):
 
+        print 'Page', page
         start = page * PROBLEMS_PER_PAGE
         url = URL + '/sort=0,start=' + str(start)
 
         request = requests.get(url)
         if request.status_code != 200:
             print 'Unable to crawl page', page
-            continue
+            return []
 
         html = BeautifulSoup(request.text)
         elements = html.select('tr[class="problemrow"]')
+        problems = []
 
         for element in elements:
             text = element.__str__().replace('\n', ' ')
@@ -38,17 +40,31 @@ def crawl_category(category):
             else:
                 print 'Regex error', text
 
-        # Last page
-        if len(elements) < PROBLEMS_PER_PAGE:
+        return problems
+
+
+    page = 0
+    problems = []
+    print 'Crawling category:', category
+
+    while True:
+        new_problems = crawl_page(page)
+        problems += new_problems
+
+        if len(new_problems) < PROBLEMS_PER_PAGE:
             break
 
         page += 1
 
+    # Write to file
     problems.sort()
     full_output_path = os.path.join( os.path.dirname(os.path.realpath(__file__)), OUTPUT_FILE)
     print "Output to " + full_output_path
     output_file = open(full_output_path, 'w')
     for problem in problems:
         output_file.write(problem + '\n')
+
+    return problems
+
 
 crawl()
