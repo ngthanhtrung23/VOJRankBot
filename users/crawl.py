@@ -172,5 +172,3 @@ def crawl_oi(last_crawled=None):
 
 
 crawl()
-# for user in user_scores:
-#     print user, user_scores[user], user_problems[user]
