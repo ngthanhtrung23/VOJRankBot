@@ -9,7 +9,7 @@ user_problems = {}
 
 
 def crawl():
-    crawl_acm()
+    # crawl_acm()
     crawl_oi()
 
 
@@ -84,7 +84,7 @@ def crawl_acm(last_crawled=None):
 
 def crawl_oi(last_crawled=None):
 
-    INPUT_FILE = os.path.join(cur_dur, '../problems/oi.txt')
+    INPUT_FILE = os.path.join(cur_dir, '../problems/oi.txt')
     OUTPUT_FILE = os.path.join(cur_dir, 'ranks/oi/')
     RANK_URL = 'http://vn.spoj.com/ranks/'
     SUBMISSION_PER_PAGE = 20
