@@ -143,12 +143,16 @@ def crawl_oi(last_crawled=None):
 
         while True:
             users, user_count = crawl_page(page)
+            stop = False
 
             for user in users:
                 if not user in users_solved:
                     users_solved[user] = users[user]
 
-            if user_count < SUBMISSION_PER_PAGE:
+                if users[user] == 0:
+                    stop = True
+
+            if user_count < SUBMISSION_PER_PAGE or stop:
                 break
 
             page += 1
