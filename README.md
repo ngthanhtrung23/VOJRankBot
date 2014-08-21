@@ -1,0 +1,4 @@
+VOJRankBot
+==========
+
+VOJ rank calculator
