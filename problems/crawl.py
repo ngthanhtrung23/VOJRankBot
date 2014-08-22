@@ -5,14 +5,14 @@ from bs4 import BeautifulSoup
 
 
 def crawl():
-    crawl_category('acm')
-    crawl_category('oi')
+    crawl_problemset('acm')
+    crawl_problemset('oi')
 
 
-def crawl_category(category):
+def crawl_problemset(problemset):
 
-    OUTPUT_FILE = category +'.txt'
-    URL = 'http://vn.spoj.com/problems/' + category
+    OUTPUT_FILE = problemset +'.txt'
+    URL = 'http://vn.spoj.com/problems/' + problemset
     PROBLEMS_PER_PAGE = 50
 
 
@@ -45,7 +45,7 @@ def crawl_category(category):
 
     page = 0
     problems = []
-    print 'Crawling category:', category
+    print 'Crawling problemset:', problemset
 
     while True:
         new_problems = crawl_page(page)
