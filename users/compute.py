@@ -15,7 +15,7 @@ def compute_acm():
 
         return users
 
-    problem_file = open('../problems/acm.txt', 'r')
+    problem_file = open('problems/acm.txt', 'r')
     problems = []
     while True:
         problem = problem_file.readline()
@@ -72,7 +72,7 @@ def compute_oi():
 
         return users, ac_count
 
-    problem_file = open('../problems/oi.txt', 'r')
+    problem_file = open('problems/oi.txt', 'r')
     problems = []
     while True:
         problem = problem_file.readline()

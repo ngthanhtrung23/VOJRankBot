@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VOJ Ranking">
+  <meta name="author" content="VOJ Team">
+  <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+  <title>VOJ - Rank list</title>
+
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="custom.css" rel="stylesheet">
+  <script src="ie10-viewport-bug-workaround.js"></script>
+  <script src="jquery.min.js"></script>
+  <script src="data.js"></script>
+  <script src="custom.js"></script>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">VOJ Ranking</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#" id="user-rank-toggle" class="toggle" show="user-rank">Users</a></li>
+          <li><a href="#" id="organization-rank-toggle" class="toggle" show="organization-rank">Organizations</a></li>
+          <li><a href="#" id="problem-list-toggle" class="toggle" show="problem-list">Problems</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main-content">
+      <div id="user-rank">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Cách tính điểm
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li>Bài acm: Nếu Đạt yêu cầu, điểm nhận được là (80 / (40 + số người Đạt yêu cầu)).</li>
+              <li>Bài oi: điểm nhận được là (80 / (40 + số người được 100)) * (điểm của bạn) / 100.0.</li>
+              <li>Các bài challenge, tutorial và main không được tính điểm.</li>
+            </ul>
+          </div>
+          <table class="table" id="user-rank-table">
+          </table>
+        </div>
+      </div>
+      <div id="organization-rank" style="display:none">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Cách tính điểm
+          </div>
+          <div class="panel-body">
+            Coming soon...
+          </div>
+          <table class="table" id="organization-rank-table">
+            <tr>
+              <th>#</th>
+              <th>Organization</th>
+              <th>Number of user</th>
+              <th>Score</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>DHKHTNDHQGHN</td>
+              <td>20</td>
+              <td>1000.0</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>PTNK</td>
+              <td>25</td>
+              <td>900.0</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="problem-list" style="display:none">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Filters
+          </div>
+          <div class="panel-body">
+            <input id="acm-toggle" type="checkbox" checked="checked" value="checked" onchange="$('.acm').toggle()"/>
+            <label for="acm-toggle">ACM</label>
+            <input id="oi-toggle" type="checkbox" checked="checked" value="checked" onchange="$('.oi').toggle()"/>
+            <label for="oi-toggle">OI</label>
+          </div>
+          <table class="table" id="problem-list-table">
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+</body>
+</html>
