@@ -13,12 +13,12 @@
 
   <title>VOJ - Rank list</title>
 
-  <link href="bootstrap.min.css" rel="stylesheet">
-  <link href="custom.css" rel="stylesheet">
-  <script src="ie10-viewport-bug-workaround.js"></script>
-  <script src="jquery.min.js"></script>
-  <script src="data.js"></script>
-  <script src="custom.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/custom.js"></script>
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -39,9 +39,9 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#" id="user-rank-toggle" class="toggle" show="user-rank">Users</a></li>
-          <li><a href="#" id="organization-rank-toggle" class="toggle" show="organization-rank">Organizations</a></li>
-          <li><a href="#" id="problem-list-toggle" class="toggle" show="problem-list">Problems</a></li>
+          <li class="active"><a href="#" id="user-rank-toggle" class="toggle" show="user-rank">Thành viên</a></li>
+          <li><a href="#" id="organization-rank-toggle" class="toggle" show="organization-rank">Trường / đơn vị</a></li>
+          <li><a href="#" id="problem-list-toggle" class="toggle" show="problem-list">Bài tập</a></li>
         </ul>
       </div>
     </div>
@@ -52,9 +52,10 @@
       <div id="user-rank">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Cách tính điểm
+          Bảng xếp hạng thành viên
           </div>
           <div class="panel-body">
+            <p>Cách tính điểm</p>
             <ul>
               <li>Bài acm: Nếu Đạt yêu cầu, điểm nhận được là (80 / (40 + số người Đạt yêu cầu)).</li>
               <li>Bài oi: điểm nhận được là (80 / (40 + số người được 100)) * (điểm của bạn) / 100.0.</li>
@@ -68,7 +69,7 @@
       <div id="organization-rank" style="display:none">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Cách tính điểm
+            Bảng xếp hạng trường / đơn vị
           </div>
           <div class="panel-body">
             Coming soon...
@@ -76,9 +77,9 @@
           <table class="table" id="organization-rank-table">
             <tr>
               <th>#</th>
-              <th>Organization</th>
-              <th>Number of user</th>
-              <th>Score</th>
+              <th>Trường / đơn vị</th>
+              <th>Số thành viên</th>
+              <th>Điểm</th>
             </tr>
             <tr>
               <td>1</td>
@@ -98,7 +99,7 @@
       <div id="problem-list" style="display:none">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Filters
+            Danh sách bài tập
           </div>
           <div class="panel-body">
             <input id="acm-toggle" type="checkbox" checked="checked" value="checked" onchange="$('.acm').toggle()"/>
@@ -112,12 +113,6 @@
       </div>
     </div>
   </div>
-
-
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="jquery.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

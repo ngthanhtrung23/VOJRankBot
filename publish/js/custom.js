@@ -4,7 +4,6 @@ $(document).ready(function () {
     load_problem_list()
 
     var current_tab = "user-rank";
-    console.log(current_tab);
 
     $(".toggle").click(function (event) {
         var node = $(event.target);
@@ -30,14 +29,16 @@ function load_user_rank() {
                 + "<td><a href='http://vn.spoj.com/users/" + user[1] + "'>" + user[1] + "</a></td>"
                 + "<td>" + user[2] + "</td>"
                 + "<td>" + user[3] + "</td>"
+                + "<td></td>"
                 + "</tr>";
     }
     $("#user-rank-table").html("");
     $("#user-rank-table").append("<tr>"
-                + "<th onclick='sort_user_by_rank()'>#</th>"
-                + "<th onclick='sort_user_by_account()'>User</th>"
-                + "<th>Organization</th>"
-                + "<th onclick='sort_user_by_rank()'>Score</th>"
+                + "<th onclick='reload_user(0)'>#&nbsp;<span class='glyphicon glyphicon-sort-by-attributes'></span></th>"
+                + "<th onclick='reload_user(1)'>Thành viên&nbsp;<span class='glyphicon glyphicon-sort-by-alphabet'></span></th>"
+                + "<th>Trường / đơn vị</th>"
+                + "<th onclick='reload_user(0)'>Điểm&nbsp;<span class='glyphicon glyphicon-sort-by-attributes-alt'></span></th>"
+                + "<th>Số bài</th>"
                 + "</tr>");
     $("#user-rank-table").append(html);
 }
@@ -47,7 +48,6 @@ function load_problem_list() {
     for(i = 0; i < problem_list.length; i += 1) {
         problem = problem_list[i];
         html += "<tr class='" + problem[1] + "'>"
-                + "<td>" + problem[0] + "</td>"
                 + "<td>" + problem[1] + "</td>"
                 + "<td><a href='http://vn.spoj.com/problems/" + problem[2] + "'>" + problem[2] + "</a></td>"
                 + "<td>" + problem[3] + "</td>"
@@ -57,12 +57,11 @@ function load_problem_list() {
     }
     $("#problem-list-table").html("");
     $("#problem-list-table").append("<tr>"
-                + "<th onclick='sort_problem_by_type()'>#</th>"
-                + "<th onclick='sort_problem_by_type()'>Type</th>"
-                + "<th onclick='sort_problem_by_id()'>ID</th>"
-                + "<th>Name</th>"
-                + "<th onclick='sort_problem_by_ac()'>Number of AC</th>"
-                + "<th onclick='sort_problem_by_score()'>Score</th>"
+                + "<th onclick='reload_problem(0)'>Loại bài&nbsp;<span class='glyphicon glyphicon-sort-by-alphabet'></span></th>"
+                + "<th onclick='reload_problem(2)'>Mã bài&nbsp;<span class='glyphicon glyphicon-sort-by-alphabet'></span></th>"
+                + "<th>Tên bài</th>"
+                + "<th onclick='reload_problem(4)'>Số người giải được&nbsp;<span class='glyphicon glyphicon-sort-by-attributes'></span></th>"
+                + "<th onclick='reload_problem(5)'>Điểm&nbsp;<span class='glyphicon glyphicon-sort-by-attributes'></span></th>"
                 + "</tr>");
     $("#problem-list-table").append(html);
 
@@ -74,56 +73,23 @@ function load_problem_list() {
     }
 }
 
-function cmp_user_account(x, y) {
-    return (x[1] < y[1]) ? (-1) : ((x[1] > y[1]) ? 1 : 0);
+function cmp_by_column(id) {
+    return function (x, y) {
+        if (typeof(x[id]) === "string") {
+            return (x[id] < y[id]) ? (-1) : (x[id] > y[id]) ? 1 : 0;
+        }
+        return (x[id] - y[id]) ? (x[id] - y[id]) : (x[0] - y[0]);
+    }
 }
 
-function cmp_user_rank(x, y) {
-    return x[0] - y[0];
+function reload_problem(id) {
+    var cmp_func = cmp_by_column(id);
+    problem_list.sort(cmp_func);
+    load_problem_list();
 }
 
-function sort_user_by_account() {
-    rank_users.sort(cmp_user_account);
+function reload_user(id) {
+    var cmp_func = cmp_by_column(id);
+    rank_users.sort(cmp_func);
     load_user_rank();
-}
-
-function sort_user_by_rank() {
-    rank_users.sort(cmp_user_rank);
-    load_user_rank();
-}
-
-function cmp_problem_id(x, y) {
-    return (x[2] < y[2]) ? (-1) : ((x[2] > y[2]) ? 1 : 0);
-}
-
-function cmp_problem_type(x, y) {
-    return x[0] - y[0];
-}
-
-function cmp_problem_by_ac(x, y) {
-    return x[4] - y[4];
-}
-
-function cmp_problem_by_score(x, y) {
-    return x[5] - y[5];
-}
-
-function sort_problem_by_id() {
-    problem_list.sort(cmp_problem_id);
-    load_problem_list();
-}
-
-function sort_problem_by_type() {
-    problem_list.sort(cmp_problem_type);
-    load_problem_list();
-}
-
-function sort_problem_by_ac() {
-    problem_list.sort(cmp_problem_by_ac);
-    load_problem_list();
-}
-
-function sort_problem_by_score() {
-    problem_list.sort(cmp_problem_by_score);
-    load_problem_list();
 }
