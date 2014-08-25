@@ -28,7 +28,11 @@ def load_problem_list():
             ac = 0
             try:
                 with open(os.path.join(FILE_PROBLEM_POINT_PATH_ACM, l + ".txt")) as file:
-                    ac = len(file.read().strip().split('\n')) - 1
+                    tmp = file.read().strip()
+                    if len(tmp) > 0:
+                        ac = len(tmp.split('\n'))
+                    else:
+                        ac = 0
             except:
                 print "Cannot load ", l
             cnt += 1

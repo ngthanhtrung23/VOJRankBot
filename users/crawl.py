@@ -1,7 +1,12 @@
+import sys
+import time
 import re
 import requests
 import os.path
 from bs4 import BeautifulSoup
+
+MAX_CRAWL = 5
+SLEEP_MINUTE = 1
 
 
 def crawl():
@@ -49,6 +54,7 @@ def crawl_acm(last_crawled=None):
 
 
     input_file = open(INPUT_FILE, 'r')
+    cnt_crawl = 0
     while True:
         problem_id = input_file.readline()
         if not problem_id:
@@ -74,6 +80,13 @@ def crawl_acm(last_crawled=None):
         output_file = open(OUTPUT_FILE + problem_id + '.txt', 'w')
         for user in users_solved:
             output_file.write(user + '\n')
+
+        cnt_crawl += 1
+        if cnt_crawl == MAX_CRAWL:
+            print "Sleep"
+            cnt_crawl = 0
+            sys.stdout.flush()
+            time.sleep(60 * SLEEP_MINUTE)
 
 
 def crawl_oi(last_crawled=None):
@@ -127,6 +140,7 @@ def crawl_oi(last_crawled=None):
 
 
     input_file = open(INPUT_FILE, 'r')
+    cnt_crawl = 0
     while True:
         problem_id = input_file.readline()
         if not problem_id:
@@ -168,6 +182,13 @@ def crawl_oi(last_crawled=None):
         output_file = open(OUTPUT_FILE + problem_id + '.txt', 'w')
         for user in users_solved_list:
             output_file.write(user[1] + ' ' + str(user[0]) + '\n')
+
+        cnt_crawl += 1
+        if cnt_crawl == MAX_CRAWL:
+            cnt_crawl = 0
+            print "Sleep"
+            sys.stdout.flush()
+            time.sleep(60 * SLEEP_MINUTE)
 
 
 crawl()
