@@ -4,11 +4,11 @@ import json
 NTOP_USER = 1000
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
 FILE_DATA_JS = os.path.join(CUR_DIR, '..', 'publish', 'data.js')
-FILE_RANK_USER = os.path.join(CUR_DIR, '..', 'rank.txt')
+FILE_RANK_USER = os.path.join(CUR_DIR, '..', 'users', 'rank.txt')
 FILE_PROBLEM_ACM = os.path.join(CUR_DIR, '..', 'problems', 'acm.txt')
 FILE_PROBLEM_OI = os.path.join(CUR_DIR, '..', 'problems', 'oi.txt')
-FILE_PROBLEM_POINT_PATH_ACM = os.path.join(CUR_DIR, '..', 'ranks', 'acm')
-FILE_PROBLEM_POINT_PATH_OI = os.path.join(CUR_DIR, '..', 'ranks', 'oi')
+FILE_PROBLEM_POINT_PATH_ACM = os.path.join(CUR_DIR, '..', 'users', 'ranks', 'acm')
+FILE_PROBLEM_POINT_PATH_OI = os.path.join(CUR_DIR, '..', 'users', 'ranks', 'oi')
 
 def load_user_rank():
     users = []

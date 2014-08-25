@@ -1,10 +1,12 @@
+import os.path
 
+cur_dir = os.path.dirname(os.path.realpath(__file__))
 
 def compute_acm():
 
     def compute_acm_problem(problem):
         print 'Computing', problem
-        rank_file = open('ranks/acm/' + problem + '.txt', 'r')
+        rank_file = open(os.path.join(cur_dir, 'ranks/acm/' + problem + '.txt'), 'r')
 
         users = []
         while True:
@@ -15,7 +17,7 @@ def compute_acm():
 
         return users
 
-    problem_file = open('problems/acm.txt', 'r')
+    problem_file = open(os.path.join(cur_dir, '..', 'acm.txt'), 'r')
     problems = []
     while True:
         problem = problem_file.readline()
@@ -40,7 +42,7 @@ def compute_acm():
 
     user_scores_list.sort()
     user_scores_list = user_scores_list[::-1]
-    output_file = open('rank-acm.txt', 'w')
+    output_file = open(os.path.join(cur_dir, 'rank-acm.txt'), 'w')
     for user in user_scores_list:
         text = user[1]
         while len(text) < 20:
@@ -55,8 +57,8 @@ def compute_oi():
 
     def compute_oi_problem(problem):
         print 'Computing', problem
-        rank_file = open('ranks/oi/' + problem + '.txt', 'r')
-
+        rank_file = open(os.path.join(cur_dir, 'ranks/oi/' + problem + '.txt'), 'r')
+        
         users = {}
         ac_count = 0
         while True:
@@ -72,7 +74,7 @@ def compute_oi():
 
         return users, ac_count
 
-    problem_file = open('problems/oi.txt', 'r')
+    problem_file = open(os.path.join(cur_dir, '..', 'oi.txt'), 'r')
     problems = []
     while True:
         problem = problem_file.readline()
@@ -97,7 +99,7 @@ def compute_oi():
 
     user_scores_list.sort()
     user_scores_list = user_scores_list[::-1]
-    output_file = open('rank-oi.txt', 'w')
+    output_file = open(os.path.join(cur_dir, 'rank-oi.txt'), 'w')
     for user in user_scores_list:
         text = user[1]
         while len(text) < 20:
@@ -109,8 +111,8 @@ def compute_oi():
 
 
 def merge():
-    acm_rank_file = open('rank-acm.txt', 'r')
-    oi_rank_file = open('rank-oi.txt', 'r')
+    acm_rank_file = open(os.path.join(cur_dir, 'rank-acm.txt'), 'r')
+    oi_rank_file = open(os.path.join(cur_dir, 'rank-oi.txt'), 'r')
 
     user_scores = {}
 
@@ -145,7 +147,7 @@ def merge():
 
     user_scores_list.sort()
     user_scores_list = user_scores_list[::-1]
-    output_file = open('rank.txt', 'w')
+    output_file = open(os.path.join(cur_dir, 'rank.txt'), 'w')
     index = 1
     for user in user_scores_list:
         # text = str(index) + '. ' + user[1]
