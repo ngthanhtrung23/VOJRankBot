@@ -15,7 +15,7 @@ def load_user_rank():
     with open(FILE_RANK_USER, 'r') as file_rank_user:
         for i in xrange(NTOP_USER):
             user, score = file_rank_user.readline().split()
-            users += [[i + 1, user, '', score]]
+            users += [[i + 1, user[0:-1], '', score]]
     return users
 
 def load_problem_list():
@@ -26,8 +26,11 @@ def load_problem_list():
         for line in lines:
             l = line.strip()
             ac = 0
-            with open(os.path.join(FILE_PROBLEM_POINT_PATH_ACM, l + ".txt")) as file:
-                ac = len(file.read().split('\n'))
+            try:
+                with open(os.path.join(FILE_PROBLEM_POINT_PATH_ACM, l + ".txt")) as file:
+                    ac = len(file.read().strip().split('\n')) - 1
+            except:
+                print "Cannot load ", l
             cnt += 1
             problems += [[cnt, 'acm', l, '', ac, round(80.0 / (40.0 + ac), 2)]]
     with open(FILE_PROBLEM_OI) as file_problem:
@@ -35,11 +38,14 @@ def load_problem_list():
         for line in lines:
             l = line.strip()
             ac = 0
-            with open(os.path.join(FILE_PROBLEM_POINT_PATH_OI, l + ".txt")) as file:
-                lines = file.readlines()
-                for line in lines:
-                    if (line.strip().endswith("100.0")):
-                        ac += 1
+            try:
+                with open(os.path.join(FILE_PROBLEM_POINT_PATH_OI, l + ".txt")) as file:
+                    lines = file.readlines()
+                    for line in lines:
+                        if (line.strip().endswith("100.0")):
+                            ac += 1
+            except:
+                print "Cannot load problem ", l
             cnt += 1
             problems += [[cnt, 'oi', l, '', ac, round(80.0 / (40.0 + ac), 2)]]
     return problems
