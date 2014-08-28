@@ -38,6 +38,7 @@ def crawl_acm(last_crawled=None):
         elements = html.select('td[class="status_sm"]')
 
         users = set()
+        cnt = 0
 
         for element in elements:
             submission = element.next.next.next
@@ -47,10 +48,11 @@ def crawl_acm(last_crawled=None):
             if submission_re:
                 user_id = submission_re.groupdict()['id']
                 users |= {user_id}
+                cnt += 1
             else:
                 print 'Regex error', text
 
-        return users
+        return users, cnt
 
 
     input_file = open(INPUT_FILE, 'r')
@@ -70,9 +72,9 @@ def crawl_acm(last_crawled=None):
         print 'Crawling problem', problem_id
 
         while True:
-            users = crawl_page(page)
+            users, cnt = crawl_page(page)
             users_solved |= users
-            if len(users) < SUBMISSION_PER_PAGE:
+            if cnt < SUBMISSION_PER_PAGE:
                 break
             page += 1
 
