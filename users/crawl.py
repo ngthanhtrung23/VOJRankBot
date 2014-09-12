@@ -118,13 +118,17 @@ def crawl_oi(last_crawled=None):
             submission = element.next.next.next
             score = submission.next.next.next
 
-            score = str(score.text)
-            score = score.replace('\n', '')
-            score = score.replace('\t', '')
-            space_index = score.find(' ')
-            if space_index > -1:
-                score = score[:space_index]
-            score = float(score)
+            try:
+                score = str(score.text)
+                score = score.replace('\n', '')
+                score = score.replace('\t', '')
+                space_index = score.find(' ')
+                if space_index > -1:
+                    score = score[:space_index]
+                score = float(score)
+            except Exception as e:
+                print e
+                continue
 
             if score == 0:
                 continue
@@ -193,4 +197,5 @@ def crawl_oi(last_crawled=None):
             time.sleep(60 * SLEEP_MINUTE)
 
 
-crawl()
+if __name__ == '__main__':
+    crawl()
