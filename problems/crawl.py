@@ -102,4 +102,5 @@ def crawl_contest(contest='', problemsets=['acm', 'oi']):
         crawl_problemset(problemset)
 
 
-crawl_contest()
+if __name__ == '__main__':
+    crawl_contest()
