@@ -193,4 +193,5 @@ def crawl_oi(last_crawled=None):
             time.sleep(60 * SLEEP_MINUTE)
 
 
-crawl()
+if __name__ == '__main__':
+    crawl()
